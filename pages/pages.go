@@ -1,6 +1,8 @@
 package pages
 
-import "os"
+import (
+	"os"
+)
 
 type Page struct {
 	Title string
@@ -8,12 +10,12 @@ type Page struct {
 }
 
 func (p *Page) Save() error {
-	filename := p.Title + ".txt"
+	filename := "pages/pages/" + p.Title + ".txt"
 	return os.WriteFile(filename, p.Body, 0600)
 }
 
 func LoadPage(title string) (*Page, error) {
-	filename := title + ".txt"
+	filename := "pages/pages/" + title + ".txt"
 	body, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err

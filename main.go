@@ -1,17 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"net/http"
 	"something/pages"
 )
 
 func main() {
-	p1 := &pages.Page{Title: "Page1", Body: []byte("Hello World")}
-	p1.Save()
-	p2, err := pages.LoadPage("Page1")
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(p2)
+
+	http.HandleFunc("/save/", pages.Save)
+	http.HandleFunc("/edit/", pages.Edit)
+	http.HandleFunc("/view/", pages.View)
+
+	log.Fatal(http.ListenAndServe(":8080", nil))
+
 }
